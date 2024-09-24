@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <!-- meta -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/assets/img/common/favicon.ico">
+    <link rel="canonical" href="" />
+    <meta property="og:site_name" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <meta property="og:title" content="" />
+    <meta property="og:description" content="" />
+    <meta property="og:url" content="" />
+    <title></title>
+  </head>
+  <body class="animate__animated animate__fadeIn">
+    <header class="header">
+      <h1 class="header__heading">IMAGE:SEARCH</h1>
+
+      <ul class="header__menu">
+        <li class="header__menuItem js-header__menuItem" data-modal-index="0">ImageSearchとは</li>
+        <li class="header__menuItem js-header__menuItem" data-modal-index="1">使い方</li>
+      </ul>
+    </header>
+    <main class="main">
+      <section class="stepLayout js-stepLayout">
+        <div class="stepLayout__inner">
+          <div class="card js-card">
+            <div class="card__complete card__complete--hide js-card__complete animate__animated animate__fadeIn animate__faster">
+
+              <div class="card__completeText animate__animated animate__bounceIn animate__faster animate__delay-2s">COMPLETE</div>
+            </div>
+            <div class="card__step">STEP0</div>
+            <div class="card__title">調査対象のURLを選択してください</div>
+            <div class="card__urlSelectBox">
+              <input id="settingUrl" class="card__urlSelect" type="url" value="https://blm-music.com">
+            </div>
+            <div class="card__buttonBox">
+              <button id="selectButton" class="card__button card__button--arrorw" type="button">
+                SELECT
+                <div class="card__buttonIcon">
+                  <svg class="card__buttonSvg card__buttonSvg--arrow" xmlns="http://www.w3.org/2000/svg" width="19" height="10" viewBox="0 0 19 10">
+                    <path d="M18.349,0.337L9.3,9.386,0.251,0.337"/>
+                  </svg>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="stepLayout stepLayout--hide js-stepLayout animate__animated animate__fadeInUp">
+        <div class="stepLayout__inner">
+          <div class="card js-card">
+            <div class="card__complete card__complete--hide js-card__complete animate__animated animate__fadeIn animate__faster">
+
+              <div class="card__completeText animate__animated animate__bounceIn animate__faster animate__delay-2s">COMPLETE</div>
+            </div>
+            <div class="card__step">STEP1</div>
+              <div class="card__title">アプライリストをアップしてください</div>
+              <div class="card__inputFileBox">
+                <input id="applyList" class="card__inputFile" type="file">
+                <div class="card__inputFileCover">ここにアプライリストをドラッグしてください</div>
+              </div>
+          </div>
+        </div>
+      </section>
+      <section class="stepLayout stepLayout--hide js-stepLayout animate__animated animate__fadeInUp">
+        <div class="stepLayout__inner">
+          <div class="card js-card">
+            <div class="card__complete card__complete--hide js-card__complete animate__animated animate__fadeIn animate__faster">
+
+              <div class="card__completeText animate__animated animate__bounceIn animate__faster animate__delay-2s">COMPLETE</div>
+            </div>
+            <div class="card__step">STEP2</div>
+            <div class="card__title">調査するURLを選択してください</div>
+            <input class="card__inputCheck js-card__inputCheckAll" id="all" type="checkbox">
+            <label class="card__inputCheckLabel" for="all">
+              <div class="card__inputCheckBox"></div>
+              <div class="card__inputCheckText card__inputCheckText--all">すべて</div>
+            </label>
+            <hr class="card__hr">
+            <ul class="card__urlList" id="appendStep2"></ul>
+            <div class="card__buttonBox">
+              <button id="nextButton" class="card__button" type="button">
+                NEXT
+                <div class="card__buttonIcon">
+                  <svg class="card__buttonSvg card__buttonSvg--arrow" xmlns="http://www.w3.org/2000/svg" width="19" height="10" viewBox="0 0 19 10">
+                    <path d="M18.349,0.337L9.3,9.386,0.251,0.337"/>
+                  </svg>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="stepLayout stepLayout--hide js-stepLayout animate__animated animate__fadeInUp">
+        <div class="stepLayout__inner">
+          <div class="card js-card">
+            <div class="card__complete card__complete--hide js-card__complete animate__animated animate__fadeIn animate__faster">
+              <div class="card__completeText animate__animated animate__bounceIn animate__faster animate__delay-2s">COMPLETE</div>
+            </div>
+            <div class="card__step">STEP3</div>
+            <div class="card__title">URL毎に調査する画像フォルダをアップしてください</div>
+
+            <ul id="appendStep3" class="card__urlList"></ul>
+            <div class="card__buttonBox">
+              <button id="searchButton" class="card__button" type="button">
+                調査
+                <div class="card__buttonIcon">
+                  <svg class="card__buttonSvg card__buttonSvg--search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="stepLayout stepLayout--hide js-stepLayout animate__animated animate__fadeInUp">
+        <div class="stepLayout__inner">
+          <div class="card js-card">
+            <div class="card__step"></div>
+            <div class="card__title">調査結果</div>
+            <div class="card__resultAll">調査数:<span id="searchCount"></span></div>
+            <table class="resultTable">
+              <thead>
+                <tr>
+                  <th class="resultTable__th">URL</th>
+                  <th class="resultTable__th">画像名</th>
+                  <th class="resultTable__th">アプライリストの記載</th>
+                  <th class="resultTable__th">接続画像と本番との差分</th>
+                  <th class="resultTable__th">ステータス</th>
+                </tr>
+              </thead>
+              <tbody id="appendResult"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="modal animate__animated animate__fadeIn js-modal" data-modal="0">
+      <div class="modal__cover js-modalClose"></div>
+      <div class="modal__card js-modal__card animate__animated animate__fadeIn animate__delay-2s">
+        <div class="modal__close js-modalClose">×</div>
+        <div class="swiper">
+          <ul class="swiper-wrapper">
+            <li class="swiper-slide">
+              <h2 class="modal__title">タイトルが入ります1</h2>
+              <div class="modal__content">
+                <h3 class="modal__subTitle">タイトルが入ります</h3>
+                <p class="modal__text">
+                  テキストが入ります。
+                  <a class="modal__link" href="">リンクです</a>
+                </p>
+                <div class="modal__imageBox">
+                  <img  class="modal__image" src="" alt="">
+                </div>
+              </div>
+            </li>
+            <li class="swiper-slide">
+              <h2 class="modal__title">タイトルが入ります2</h2>
+              <div class="modal__content">
+                <h3 class="modal__subTitle">タイトルが入ります</h3>
+                <p class="modal__text">
+                  テキストが入ります。
+                  <a class="modal__link" href="">リンクです</a>
+                </p>
+                <div class="modal__imageBox">
+                  <img  class="modal__image" src="" alt="">
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal animate__animated animate__fadeIn js-modal" data-modal="1">
+      <div class="modal__cover js-modalClose"></div>
+      <div class="modal__card js-modal__card animate__animated animate__fadeIn animate__delay-2s">
+        <div class="modal__close js-modalClose">×</div>
+        <div class="swiper">
+          <ul class="swiper-wrapper">
+            <li class="swiper-slide">
+              <h2 class="modal__title">タイトルが入ります1</h2>
+              <div class="modal__content">
+                <h3 class="modal__subTitle">タイトルが入ります</h3>
+                <p class="modal__text">
+                  テキストが入ります。
+                  <a class="modal__link" href="">リンクです</a>
+                </p>
+                <div class="modal__imageBox">
+                  <img  class="modal__image" src="" alt="">
+                </div>
+              </div>
+            </li>
+            <li class="swiper-slide">
+              <h2 class="modal__title">タイトルが入ります1</h2>
+              <div class="modal__content">
+                <h3 class="modal__subTitle">タイトルが入ります</h3>
+                <p class="modal__text">
+                  テキストが入ります。
+                  <a class="modal__link" href="">リンクです</a>
+                </p>
+                <div class="modal__imageBox">
+                  <img  class="modal__image" src="" alt="">
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </div>
+
+    <template id="append2Template">
+      <li class="card__urlListItem card__urlListItem--min">
+        <input class="card__inputCheck js-card__inputCheckId" name="url" type="checkbox">
+        <label class="card__inputCheckLabel" id="checkLabel">
+          <div class="card__inputCheckBox"></div>
+          <div class="card__inputCheckText" id="checkText"></div>
+        </label>
+      </li>
+    </template>
+    <template id="append3Template">
+      <li class="card__urlListItem">
+        <div class="card__selectUrl js-setUrlText"></div>
+        <div class="card__uploadBox">
+          <div class="card__upload js-card__upload">
+            <div class="card__selectUrlBox js-card__selectUrlBox">
+              <div class="card__uploadText">接続画像</div>
+              <button class="card__seletCancel card__seletCancel--hide js-card__seletCancel">取り消す</button>
+            </div>
+            <div class="card__inputFileBox card__inputFileBox--min js-card__inputFileBox animate__animated">
+              <input class="card__inputFile js-inputSearch" name="setuzoku" type="file" webkitdirectory multiple>
+              <div class="card__inputFileCover">ここに画像フォルダをドラッグしてください</div>
+            </div>
+          </div>
+          <div class="card__upload js-card__upload">
+            <div class="card__selectUrlBox js-card__selectUrlBox">
+              <div class="card__uploadText card__uploadText--honban">本番環境</div>
+              <button class="card__seletCancel card__seletCancel--hide js-card__seletCancel">取り消す</button>
+            </div>
+            <div class="card__inputFileBox card__inputFileBox--min js-card__inputFileBox animate__animated">
+              <input class="card__inputFile js-inputSearch" name="honban" type="file" webkitdirectory multiple>
+              <div class="card__inputFileCover">ここに画像フォルダをドラッグしてください</div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </template>
+    <template id="resultTemplate">
+      <tr id="tabelTr">
+        <td class="resultTable__td">
+          <a href="" target="_blank" id="tabelUrl"></a>
+        </td>
+        <td class="resultTable__td" id="tableImage"></td>
+        <td class="resultTable__td" id="tableApply"></td>
+        <td class="resultTable__td" id="tableDiff"></td>
+        <td class="resultTable__td" id="tableStatus"></td>
+      </tr>
+    </template>
+    <script src="/assets/js/main.js" type="module"></script>
+  </body>
+</html>
