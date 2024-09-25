@@ -70,13 +70,13 @@ function completeOn(_this, index) {
 }
 
 /**
- * [somFolderData]
+ * [samFolderData]
  * foldersの中に既にオブジェクトが設定済みかどうかをidで判定
  * @param { Array } folders - 調査情報のオブジェクトが格納された配列
  * @param { number } index - アップされたURLのインデックス
  * @returns { boolean }
 */
-function somFolderData(folders, index) {
+function samFolderData(folders, index) {
   for(let object of folders){
     if(object.id == index) return true;
   }
@@ -86,8 +86,8 @@ function somFolderData(folders, index) {
 /**
  * [compareArrayBuffers]
  * foldersの中に既にオブジェクトが設定済みかどうかをidで判定
- * @param { Array } buffer1 - 調査情報のオブジェクトが格納された配列
- * @param { number } buffer2 - アップされたURLのインデックス
+ * @param { Buffer } buffer1 - 比較対象のバイナリデータ
+ * @param { Buffer } buffer2 - 比較対象のバイナリデータ
  * @returns { boolean }
 */
 function compareArrayBuffers(buffer1, buffer2) {
@@ -110,8 +110,11 @@ function compareArrayBuffers(buffer1, buffer2) {
 /**
  * [setImageData]
  * foldersの中に既にオブジェクトが設定済みかどうかをidで判定
- * @param { Array } folders - 調査情報のオブジェクトが格納された配列
- * @param { number } index - アップされたURLのインデックス
+ * @param { String } type - ドロップされた画像の種別 honban or setuzoku
+ * @param { Array } imageData - 画像情報を登録する配列
+ * @param { FileList } files - ドロップされた画像ファイル
+ * @param { String } directory - ドロップされたディレクトリ名
+ * @returns { Array }
 */
 function setImageData(type, imageData, files, directory) {
   let imageBuffers = [];
@@ -293,9 +296,9 @@ appendStep3.addEventListener('change', function(e) {
   const directorys = target.closest('.js-card').querySelectorAll('.js-setUrlText');
   const directory = directorys[index].textContent;
 
-  if(somFolderData(folders, index)){
+  if(samFolderData(folders, index)){
     setImageData(type, folders[index], files, directory);
-  } else if (folders.length === 0 || !somFolderData(folders,index)) {
+  } else if (folders.length === 0 || !samFolderData(folders, index)) {
 
     // 初回登録、または未登録のURLの時の処理
     let imageData = {
@@ -308,13 +311,20 @@ appendStep3.addEventListener('change', function(e) {
   }
 
   // ドロップ領域を非表示に変更
+  // DOM 参照用の親要素
+  const parent = target.closest('.js-card__upload');
   const inpuFileBox = target.closest('.js-card__inputFileBox');
-  const selectCansel = target.closest('.js-card__upload').querySelector('.js-card__seletCancel');
+  const selectCansel = parent.querySelector('.js-card__seletCancel');
   inpuFileBox.classList.add('animate__flipOutX');
+  if(type === 'honban') {
+    parent.querySelector('.js-card__notImage').classList.add('card__notImage--hide');
+  }
   setTimeout(function(){
     inpuFileBox.style.paddingTop = '0%';
     selectCansel.classList.remove('card__seletCancel--hide');
   }, 600);
+
+  console.log(folders)
 
   // 「取り消し」ボタン押下後、再度同じファイルをアップできるようにするため file input の値をリセット
   target.value = '';
@@ -326,11 +336,57 @@ appendStep3.addEventListener('click', function(e){
   if (!target.classList.contains('js-card__seletCancel')) return;
 
   // すべてのドロップ領域を取得
-  const inpuFileBox = target.closest('.js-card__upload').querySelector('.js-card__inputFileBox');
+  // DOM 参照用の親要素
+  const parent = target.closest('.js-card__upload');
+  const inpuFileBox = parent.querySelector('.js-card__inputFileBox');
 
   target.classList.add('card__seletCancel--hide');
   inpuFileBox.removeAttribute('style');
   inpuFileBox.classList.remove('animate__flipOutX');
+  parent.querySelector('.js-card__notImage').classList.remove('card__notImage--hide');
+});
+
+// 「本番画像なし」ボタンが押下された時の処理
+appendStep3.addEventListener('click', function(e){
+  const target = e.target;
+  if (!target.classList.contains('js-card__notImage')) return;
+  // DOM 参照用の親要素
+  const parent = target.closest('.js-card__upload');
+  // ドロップ Input
+  const fileInput = parent.querySelector('.js-inputSearch');
+  // 押下された input の index
+  const index = Number(fileInput.dataset.index);
+  // ドロップされたファイル群
+  const files = fileInput.files;
+  // テキストになっているディレクトリを全て取得
+  const directorys = target.closest('.js-card').querySelectorAll('.js-setUrlText');
+  const directory = directorys[index].textContent;
+
+  if(samFolderData(folders, index)){
+    setImageData('honban', folders[index], files, directory);
+  } else if (folders.length === 0 || !samFolderData(folders, index)) {
+
+    // 初回登録、または未登録のURLの時の処理
+    let imageData = {
+      id: index,
+      directory: directory
+    };
+
+    setImageData('honban', imageData, files, directory);
+    folders.push(imageData);
+  }
+
+  // ドロップ領域を非表示に変更
+  const inpuFileBox = parent.querySelector('.js-card__inputFileBox');
+  const selectCansel = parent.querySelector('.js-card__seletCancel');
+  inpuFileBox.classList.add('animate__flipOutX');
+  target.classList.add('card__notImage--hide');
+  setTimeout(function(){
+    inpuFileBox.style.paddingTop = '0%';
+    selectCansel.classList.remove('card__seletCancel--hide');
+  }, 600);
+
+  console.log(folders)
 });
 
 // 「調査」ボタンが押下された時の処理

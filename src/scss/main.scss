@@ -396,8 +396,6 @@
     background-color: #f6fbfb;
     opacity: 1;
     transition: .3s;
-    position: relative;
-    top: 0;
     &--hide {
       pointer-events: none;
       opacity: 0;
@@ -406,6 +404,36 @@
       top: 2px;
       box-shadow: 0 0px 0px rgba(39, 39, 39, 0.25);
     }
+  }
+
+  &__notImage {
+    font-size: 16px;
+    font-weight: bold;
+    color: #6a4e2b;
+    border: 2px solid #fff2ef;
+    border-radius: 5px;
+    height: 40px;
+    padding: 0 15px;
+    margin-left: 20px;
+    box-shadow: 0 2px 3px rgba(39, 39, 39, 0.25);
+    background-color: #fbf8f6;
+    opacity: 1;
+    transition: .3s;
+    &--hide {
+      pointer-events: none;
+      opacity: 0;
+    }
+    &:hover {
+      top: 2px;
+      box-shadow: 0 0px 0px rgba(39, 39, 39, 0.25);
+    }
+  }
+
+  &__buttonLayout {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
   }
 }
 
